@@ -1,295 +1,338 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title> BCKLR's Pick</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Barlow+Condensed:wght@300;400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
-    <style>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BCKLR's Pick</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Barlow+Condensed:wght@300;400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
 
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-      html {
-        scroll-behavior: smooth;
-        scroll-snap-type: y mandatory;
-      }
+    html {
+      scroll-behavior: smooth;
+      scroll-snap-type: y mandatory;
+    }
 
-      body {
-        font-family: 'Inter', sans-serif;
-        overflow-x: hidden;
-        cursor: default;
-      }
+    body {
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      cursor: default;
+    }
 
-      .masthead {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 100;
-        padding: 1.2rem 3rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        mix-blend-mode: normal;
-      }
+    .masthead {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-      .masthead-title {
-        font-family: 'Barlow Condensed', sans-serif;
-        font-size: 1rem;
-        font-weight: 800;
-        letter-spacing: 0.3em;
-        text-transform: uppercase;
-        color: #fff;
-        opacity: 0.9;
-      }
+    .masthead-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #fff;
+      opacity: 0.9;
+    }
 
-      .masthead-nav {
-        display: flex;
-        gap: 2rem;
-      }
+    .masthead-nav {
+      display: flex;
+      gap: 2rem;
+    }
 
-      .masthead-nav a {
-        font-size: 0.65rem;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        color: rgba(255,255,255,0.5);
-        text-decoration: none;
-        transition: color 0.2s ease;
-      }
+    .masthead-nav a {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
 
-      .masthead nav a:hover {
-        color: rgba(255,255,255,0.9);
-      }
+    .masthead-nav a:hover {
+      color: rgba(255,255,255,0.9);
+    }
 
-      .chapter {
-        width: 100%;
-        height: 100vh;
-        scroll-snap-align: start;
-        position: relative;
-        display: flex;
-        align-items: center;
-        overflow: hidden;
-      }
+    .chapter {
+      width: 100%;
+      height: 100vh;
+      scroll-snap-align: start;
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
 
-      .chapter-content {
-        position: relative;
-        z-index: 2;
-        padding: 6rem 5rem 4rem;
-        max-width: 700px;
-      }
+    .chapter-content {
+      position: relative;
+      z-index: 2;
+      padding: 6rem 5rem 4rem;
+      max-width: 700px;
+    }
 
-      .chapter-bg {
-        position: absolute;
-        inset: 0;
-        z-index: 0;
-      }
+    .chapter-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
 
-      .album-cover {
-        position: absolute;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        width: 45%;
-        object-fit: cover;
-        z-index: 1;
-        opacity: 0.35;
-      }
+    .album-cover {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 45%;
+      object-fit: cover;
+      z-index: 1;
+      opacity: 0.35;
+      transition: opacity 0.4s ease, filter 0.4s ease;
+    }
 
-      .cover-fade {
-        position: absolute;
-        inset: 0;
-        z-index: 1;
-      }
+    .chapter:hover .album-cover {
+      opacity: 0.6;
+    }
 
-      .artist-number {
-        font-family: 'Barlow Condensed', sans-serif;
-        font-size: 0.7rem;
-        font-weight: 700;
-        letter-spacing: 0.4em;
-        text-transform: uppercase;
-        margin-bottom: 1.5rem;
-        opacity: 0.5;
-      }
+    #odeal:hover .album-cover {
+      filter: drop-shadow(-20px 0 40px rgba(100, 160, 255, 0.6));
+    }
 
-      .artist-name {
-        font-family: 'Barlow Condensed', sans-serif;
-        font-size: 5rem;
-        font-weight: 900;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-        line-height: 0.9;
-        margin-bottom: 0.5rem;
-      }
+    #asake:hover .album-cover {
+      filter: drop-shadow(-20px 0 40px rgba(245, 200, 66, 0.5));
+    }
 
-      .album-title {
-        font-family: 'Playfair Display', serif;
-        font-size: 1rem;
-        font-style: italic;
-        opacity: 0.6;
-        margin-bottom: 0.5rem;
-        letter-spacing: 0.05em;
-      }
+    #toliver:hover .album-cover {
+      filter: drop-shadow(-20px 0 40px rgba(100, 150, 255, 0.5));
+    }
 
-      .rating {
-        font-family: 'Barlow Condensed', sans-serif;
-        font-size: 1.1rem;
-        font-weight: 700;
-        letter-spacing: 0.15em;
-        margin-bottom: 2rem;
-        opacity: 0.8;
-      }
+    #tems:hover .album-cover {
+      filter: drop-shadow(-20px 0 40px rgba(0, 200, 100, 0.5));
+    }
 
-      .divider {
-        width: 60px;
-        height: 2px;
-        margin-bottom: 1.8rem;
-        opacity: 0.6;
-      }
+    #raveena:hover .album-cover {
+      filter: drop-shadow(-20px 0 40px rgba(255, 180, 100, 0.6));
+    }
 
-      .artist-write {
-        font-family: 'Playfair Display', serif;
-        font-size: 1rem;
-        line-height: 1.85;
-        opacity: 0.85;
-        max-width: 520px;
-      }
+    #kali:hover .album-cover {
+      filter: drop-shadow(-20px 0 40px rgba(200, 100, 150, 0.6));
+    }
 
-      .scroll-hint {
-        position: absolute;
-        bottom: 2rem;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 0.65rem;
-        letter-spacing: 0.3em;
-        text-transform: uppercase;
-        opacity: 0.3;
-        z-index: 2;
-        animation: bounce 2s infinite;
-      }
+    .cover-fade {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
 
-      @keyframes bounce {
-        0%, 100% { transform: translateX(-50%) translateY(0); }
-        50% { transform: translateX(-50%) translateY(6px); }
-      }
-    </style>
-  </head>
-  <body>
+    .artist-number {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      opacity: 0.5;
+    }
 
+    .artist-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 5rem;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      line-height: 0.9;
+      margin-bottom: 0.5rem;
+    }
 
-    <nav class="masthead">
-      <span class="masthead-title">BCKLR's Pick</span>
-      <div class="masthead-nav">
-        <a href="#odeal">Odeal</a> 
-        <a href="#asake">Asake</a>
+    .album-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-style: italic;
+      opacity: 0.6;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.05em;
+    }
+
+    .rating {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      margin-bottom: 2rem;
+      opacity: 0.8;
+    }
+
+    .divider {
+      width: 60px;
+      height: 2px;
+      margin-bottom: 1.8rem;
+      opacity: 0.6;
+    }
+
+    .artist-write {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      line-height: 1.85;
+      opacity: 0.85;
+      max-width: 520px;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      opacity: 0.3;
+      z-index: 2;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+
+  </style>
+</head>
+<body>
+
+  <nav class="masthead">
+    <span class="masthead-title">BCKLR's Pick</span>
+    <div class="masthead-nav">
+      <a href="#odeal">Odeal</a>
+      <a href="#asake">Asake</a>
       <a href="#toliver">Toliver</a>
       <a href="#tems">Tems</a>
       <a href="#raveena">Raveena</a>
       <a href="#kali">Kali</a>
-      </div>
-    </nav>
+    </div>
+  </nav>
 
-    <section class="chapter" id="odeal">
-    <div class="chapter-bg" style="background: linear-gradient(135deg, #0a0f1e 0%, #0d1b35 40%, #1a2a4a 100%);"></div>
-    <img class="album-cover" src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a3/Odeal_-_Lustropolis.png/220px-Odeal_-_Lustropolis.png" alt="Lustropolis" />
-    <div class="cover-fade" style="background: linear-gradient(to right, #0a0f1e 45%, transparent 100%);"></div>
+  <!-- CHAPTER 1 — ODEAL -->
+  <section class="chapter" id="odeal">
+    <div class="chapter-bg" style="background: linear-gradient(135deg, #0a1628 0%, #0d1f3c 40%, #1a2a4a 70%, #0a0f1e 100%);"></div>
+    <img class="album-cover" src="lustropolis.jpg" alt="Lustropolis" />
+    <div class="cover-fade" style="background: linear-gradient(to right, #0a1628 45%, transparent 100%);"></div>
     <div class="chapter-content" style="color: #c8d8f0;">
-      <p class="artist-number" style="color: #7a9cc4;">01 — Odeal</p>
-      <h2 class="artist-name" style="color: #c8d8f0;">ODEAL</h2>
-      <p class="album-title" style="color: #7a9cc4;">Lustropolis, 2024</p>
-      <p class="rating" style="color: #7a9cc4;">★ 9.9 / 10</p>
-      <div class="divider" style="background: #7a9cc4;"></div>
+      <p class="artist-number" style="color: #7a9cc5;">01 — Odeal</p>
+      <h2 class="artist-name" style="color: #c8d8f0; text-shadow: 0 0 80px rgba(100, 160, 255, 0.3);">ODEAL</h2>
+      <p class="album-title" style="color: #7a9cc5;">Lustropolis, 2024</p>
+      <p class="rating" style="color: #7a9cc5;">9.9 / 10</p>
+      <div class="divider" style="background: #7a9cc5;"></div>
       <p class="artist-write">
-        Odeal's music is a whole new genre. I loved re-experiencing R&B and hearing a completely new spin on it. When I first heard of him in an interview I was reluctant to check him out — I figured his music wouldn't be much. Little did I know, discovering his music would be one of the best things to happen to me. He speaks on topics so many people can relate to, and he knows how to change flows without ever leaving his original sound. Discovering him was the best thing to happen to my music taste.
+        Odeal's music is a whole new genre. I loved re-experiencing R&B and hearing a completely new spin on it. When I first heard of him in an interview I was reluctant to check him out — I figured his music wouldn't be much. Little did I know, discovering his music would be one of the best things to happen to me. He speaks on so many topics people can relate to, and he knows how to change flows without ever leaving his original sound. Discovering him was the best thing to happen to my music taste.
       </p>
     </div>
-    <span class="scroll-hint" style="color: #7a9cc4;">Scroll ↓</span>
+    <p class="scroll-hint" style="color: #c8d8f0;">Scroll ↓</p>
   </section>
 
+  <!-- CHAPTER 2 — ASAKE -->
   <section class="chapter" id="asake">
-    <div class="chapter-bg" style="background: #0a0a0a;"></div>
-    <img class="album-cover" src="https://upload.wikimedia.org/wikipedia/en/8/8d/Asake_-_Mr._Money_with_the_Vibe.png" alt="Mr Money With The Vibe" style="opacity: 0.25; filter: grayscale(30%);"/>
+    <div class="chapter-bg" style="background: linear-gradient(135deg, #0a0a0a 0%, #111 50%, #1a1a0a 100%);"></div>
+    <img class="album-cover" src="asake.jpg" alt="Mr Money With The Vibe" />
     <div class="cover-fade" style="background: linear-gradient(to right, #0a0a0a 45%, transparent 100%);"></div>
     <div class="chapter-content" style="color: #f5f5f5;">
       <p class="artist-number" style="color: #888;">02 — Asake</p>
-      <h2 class="artist-name" style="color: #f5f5f5; font-size: 4.5rem;">ASAKE</h2>
-      <p class="album-title" style="color: #888;">Mr. Money With The Vibe, 2022 &nbsp;·&nbsp; M$NEY, 2026</p>
-      <p class="rating" style="color: #d4af37;">★ 10 / 10 &nbsp;&nbsp; ★ 7.3 / 10</p>
-      <div class="divider" style="background: #d4af37;"></div>
-      <p class="artist-write" style="color: #ccc;">
-        Asake was a crazy discovery. I got into his music while exploring the rising wave of Afrobeats. Like Odeal, he has a truly unique sound — he can make you feel the song before even hearing the lyrics. It's like having your heartbeat revived. Even just hearing his producer tags, whether it's "Tune in to the King of sounds and blues" or "Ololade mi, Asake" — it hits you instantly and you become tuned in. I wasn't fond of him at first, but after watching an interview and hearing more of his sound I became hooked. He easily became one of my top 5 artists of 2026.
+      <h2 class="artist-name" style="color: #f5f5f5; text-shadow: 0 0 80px rgba(245,200,66,0.2);">ASAKE</h2>
+      <p class="album-title" style="color: #888;">Mr. Money With The Vibe, 2022 · M$NEY, 2026</p>
+      <p class="rating" style="color: #f5c842;">10 / 10 · 7.3 / 10</p>
+      <div class="divider" style="background: #f5c842;"></div>
+      <p class="artist-write">
+        Asake was a crazy discovery. I got into his music while discovering the rise of Afrobeats. Like Odeal, he has a truly unique sound — he can make you feel the song before even hearing the lyrics. It's like having your heartbeat revived. Even just hearing his producer tags, whether it be "Tune in to the King of sounds and blues" or "Ololade mi, Asake" — it hits you instantly and you become tuned in. It wasn't until I watched an interview and started hearing more of his amazing sound that I became hooked. He easily became one of my top 5 artists of 2026.
       </p>
     </div>
-    <span class="scroll-hint" style="color: #555;">Scroll ↓</span>
   </section>
 
+  <!-- CHAPTER 3 — DON TOLIVER -->
   <section class="chapter" id="toliver">
-    <div class="chapter-bg" style="background: linear-gradient(160deg, #080808 0%, #0d0d0d 50%, #111318 100%);"></div>
-    <img class="album-cover" src="https://upload.wikimedia.org/wikipedia/en/4/4f/Don_Toliver_-_Hardstone_Psycho.png" alt="OCTANE" style="opacity: 0.2; filter: grayscale(20%) hue-rotate(200deg);"/>
+    <div class="chapter-bg" style="background: linear-gradient(135deg, #080808 0%, #0f0f0f 40%, #111318 70%, #080808 100%);"></div>
+    <img class="album-cover" src="toliver.jpg" alt="OCTANE" />
     <div class="cover-fade" style="background: linear-gradient(to right, #080808 45%, transparent 100%);"></div>
     <div class="chapter-content" style="color: #e8e8e8;">
-      <p class="artist-number" style="color: #4a6fa5;">03 — Don Toliver</p>
-      <h2 class="artist-name" style="color: #e8e8e8; letter-spacing: 0.08em;">DON<br/>TOLIVER</h2>
-      <p class="album-title" style="color: #4a6fa5;">OCTANE, 2026</p>
-      <p class="rating" style="color: #4a6fa5;">★ 8.4 / 10</p>
-      <div class="divider" style="background: linear-gradient(to right, #4a6fa5, #7ab3e0);"></div>
-      <p class="artist-write" style="color: #bbb;">
-        Rediscovering Don Toliver was an odd experience. You'd hear a lot of negativity around him — people felt his sound hadn't developed past 2019, that he fell off. I can fully admit I wasn't a fan until OCTANE dropped and we got to hear something genuinely different. He stayed true to his sound but brought a completely new vibe. This album is like something that may not look appealing at first but ends up being the most delicious thing on the table. He easily became one of my favorites with just this one project. I hope to hear more soon.
-      </p>
-    </div>
-    <span class="scroll-hint" style="color: #4a6fa5;">Scroll ↓</span>
-  </section>
-
-  <section class="chapter" id="tems">
-    <div class="chapter-bg" style="background: linear-gradient(135deg, #050e08 0%, #0a1f10 50%, #0f2a15 100%);"></div>
-    <img class="album-cover" src="https://upload.wikimedia.org/wikipedia/en/b/b9/Tems_-_Born_in_the_Wild.png" alt="Born In The Wild" style="opacity: 0.3;"/>
-    <div class="cover-fade" style="background: linear-gradient(to right, #050e08 45%, transparent 100%);"></div>
-    <div class="chapter-content" style="color: #d4e8d0;">
-      <p class="artist-number" style="color: #4a9e6a;">04 — Tems</p>
-      <h2 class="artist-name" style="color: #d4e8d0;">TEMS</h2>
-      <p class="album-title" style="color: #4a9e6a;">Born in the Wild, 2024 &nbsp;·&nbsp; Love Is a Kingdom, 2021</p>
-      <p class="rating" style="color: #d4af37;">★ 9.3 / 10 &nbsp;&nbsp; ★ 9 / 10</p>
-      <div class="divider" style="background: #d4af37;"></div>
+      <p class="artist-number" style="color: #555;">03 — Don Toliver</p>
+      <h2 class="artist-name" style="color: #e8e8e8; text-shadow: 0 0 80px rgba(100,150,255,0.15);">TOLIVER</h2>
+      <p class="album-title" style="color: #555;">OCTANE, 2026</p>
+      <p class="rating" style="color: #7a9cc5;">8.4 / 10</p>
+      <div class="divider" style="background: #7a9cc5;"></div>
       <p class="artist-write">
-        Tems was always played in my household — especially when she featured on "WAIT FOR U." Her part on that song was incredible and really shed light on how talented she is. My favorite album is Love Is a Kingdom purely because those songs are so unique and you don't hear them as much. Her music heavily swayed me toward Afrobeats, as it did for most people. Her music is still going viral to this day. I think that speaks enough for how lit she really is.
+        Rediscovering Don Toliver was an odd experience. You would hear a lot of negativity around this artist — for no real reason. People felt his sound didn't develop past 2019, that he fell off. I can admit I wasn't a fan until OCTANE released and we got to hear his sound really develop. It was amazing how he stayed true to himself but brought a completely different vibe. His music was a game changer for my taste. The OCTANE album is like something that may not look appealing but ends up being the most delicious thing on the table. He easily became one of my favorites with just this one album.
       </p>
     </div>
-    <span class="scroll-hint" style="color: #4a9e6a;">Scroll ↓</span>
   </section>
 
+  <!-- CHAPTER 4 — TEMS -->
+  <section class="chapter" id="tems">
+    <div class="chapter-bg" style="background: linear-gradient(135deg, #0a1a0f 0%, #0f2218 40%, #1a3a2a 70%, #0a1a0f 100%);"></div>
+    <img class="album-cover" src="tems.jpg" alt="Born In The Wild" />
+    <div class="cover-fade" style="background: linear-gradient(to right, #0a1a0f 45%, transparent 100%);"></div>
+    <div class="chapter-content" style="color: #d4edda;">
+      <p class="artist-number" style="color: #5a8a6a;">04 — Tems</p>
+      <h2 class="artist-name" style="color: #d4edda; text-shadow: 0 0 80px rgba(0,200,100,0.2);">TEMS</h2>
+      <p class="album-title" style="color: #5a8a6a;">Born In The Wild, 2024 · Love Is A Kingdom, 2021</p>
+      <p class="rating" style="color: #a8d5b5;">9.3 / 10 · 9 / 10</p>
+      <div class="divider" style="background: #5a8a6a;"></div>
+      <p class="artist-write">
+        Tems was always played in my household, especially when she featured on "WAIT FOR U" — her part on that song was amazing and really shed light on how talented she is. My favorite album is Love Is A Kingdom purely for the fact that the songs within it are so unique and you don't hear them as much. Tems' music means a lot to me as her sound heavily swayed me toward Afrobeats, as it did for most people. Her music is still going viral to this day — I think that speaks enough for how lit she is.
+      </p>
+    </div>
+  </section>
+
+  <!-- CHAPTER 5 — RAVEENA -->
   <section class="chapter" id="raveena">
-    <div class="chapter-bg" style="background: linear-gradient(135deg, #1a0f0a 0%, #2a1510 50%, #1f1208 100%);"></div>
-    <img class="album-cover" src="https://upload.wikimedia.org/wikipedia/en/2/2e/Raveena_-_Lucid.jpg" alt="Lucid" style="opacity: 0.3; filter: saturate(0.8);"/>
-    <div class="cover-fade" style="background: linear-gradient(to right, #1a0f0a 45%, transparent 100%);"></div>
+    <div class="chapter-bg" style="background: linear-gradient(135deg, #2a1a0f 0%, #3d2010 40%, #4a2a15 70%, #2a1a0f 100%);"></div>
+    <img class="album-cover" src="raveena.jpg" alt="Lucid" />
+    <div class="cover-fade" style="background: linear-gradient(to right, #2a1a0f 45%, transparent 100%);"></div>
     <div class="chapter-content" style="color: #f5e6d0;">
       <p class="artist-number" style="color: #c4956a;">05 — Raveena</p>
-      <h2 class="artist-name" style="color: #f5e6d0;">RAVEENA</h2>
+      <h2 class="artist-name" style="color: #f5e6d0; text-shadow: 0 0 80px rgba(255,180,100,0.2);">RAVEENA</h2>
       <p class="album-title" style="color: #c4956a;">Lucid, 2019</p>
-      <p class="rating" style="color: #c4956a;">★ 10 / 10</p>
-      <div class="divider" style="background: linear-gradient(to right, #c4956a, #e8c49a);"></div>
+      <p class="rating" style="color: #e8c49a;">10 / 10</p>
+      <div class="divider" style="background: #c4956a;"></div>
       <p class="artist-write">
-        I discovered Raveena while trying to become more in touch with my feminine side — she was among my other favorite women artists like Cleo Sol. I chose Raveena because she introduces this slow, loving, intentional type of sound that can bring you to tears. Her music feels soft and cradle-like. It can easily relax your nervous system and it balances out my music taste on the spectrum. You can always tell how intentional she is with her sound just from the melody alone. She's another I hope to hear from again soon.
+        I discovered Raveena while trying to become more in touch with my feminine side. She was among one of my other favorite women artists, Cleo Sol. I chose Raveena because she introduces this slow, loving, intentional type of sound that can bring you to tears. I love her music because it feels soft and cradle-like — it can easily relax your nervous system and it balances out my music taste on the spectrum. You can always tell how intentional she is with her sound just from her melody. She's another I hope to hear from again soon.
       </p>
     </div>
-    <span class="scroll-hint" style="color: #c4956a;">Scroll ↓</span>
   </section>
 
+  <!-- CHAPTER 6 — KALI UCHIS -->
   <section class="chapter" id="kali">
-    <div class="chapter-bg" style="background: linear-gradient(135deg, #120508 0%, #1e0810 50%, #150510 100%);"></div>
-    <img class="album-cover" src="https://upload.wikimedia.org/wikipedia/en/6/6d/Kali_Uchis_-_Red_Moon_in_Venus.png" alt="Red Moon In Venus" style="opacity: 0.3;"/>
-    <div class="cover-fade" style="background: linear-gradient(to right, #120508 45%, transparent 100%);"></div>
-    <div class="chapter-content" style="color: #f0d8e0;">
-      <p class="artist-number" style="color: #b05070;">06 — Kali Uchis</p>
-      <h2 class="artist-name" style="color: #f0d8e0;">KALI<br/>UCHIS</h2>
-      <p class="album-title" style="color: #b05070;">Red Moon In Venus, 2023</p>
-      <p class="rating" style="color: #b05070;">★ 10 / 10</p>
-      <div class="divider" style="background: linear-gradient(to right, #b05070, #d4809a);"></div>
+    <div class="chapter-bg" style="background: linear-gradient(135deg, #1a0a15 0%, #2d1020 40%, #3d1a2a 70%, #1a0a15 100%);"></div>
+    <img class="album-cover" src="kali.jpg" alt="Red Moon In Venus" />
+    <div class="cover-fade" style="background: linear-gradient(to right, #1a0a15 45%, transparent 100%);"></div>
+    <div class="chapter-content" style="color: #f0d8e8;">
+      <p class="artist-number" style="color: #a06080;">06 — Kali Uchis</p>
+      <h2 class="artist-name" style="color: #f0d8e8; text-shadow: 0 0 80px rgba(200,100,150,0.2);">KALI</h2>
+      <p class="album-title" style="color: #a06080;">Red Moon In Venus, 2023</p>
+      <p class="rating" style="color: #d4a0c0;">10 / 10</p>
+      <div class="divider" style="background: #a06080;"></div>
       <p class="artist-write">
-        Thee Kali Uchis. I don't remember exactly where I discovered her but she was also found along the path of reconnecting to my feminine side. Her sound is one of the most unique I've heard, and it's not just the sound that keeps people — it's the experiences she sings about. This album in particular was deeply breakup related. I connected with it heavily since I was dealing with something similar at the time. She knows exactly what she's doing and how to perfect a song, especially when she switches her flow mid track. An amazing addition to my music taste.
+        Thee Kali Uchis. I don't remember where or how I discovered her, but she was one of the artists I found along the path of reconnecting to my feminine side. Her sound is one of the most unique and I won't act like it's all her sound that keeps people coming — it's the experiences she sings about. This album in particular was very breakup related, and I connected deeply with it since I was dealing with something similar at the time. Needless to say, Kali Uchis was an amazing addition to my music taste. She knows exactly what she's doing and how to perfect a song — especially when she switches her flow mid song.
       </p>
     </div>
-    <span class="scroll-hint" style="color: #b05070; opacity: 0;">·</span>
   </section>
+
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
